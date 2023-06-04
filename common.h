@@ -7,4 +7,6 @@
 
 typedef int ElemType;           //数据类型
 
+#define MaxSize 100
+
 #endif //AUCOMPUTERSCIENCETEST_COMMON_H

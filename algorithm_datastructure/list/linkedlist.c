@@ -1,18 +1,25 @@
 //
 // Created by JXR on 2023/6/1.
 //
-#include "seqlist.h"
+#include "linkedlist.h"
 
-bool InitList(SeqList *L) {
-    L->length = 0;
-    return true;
+bool InitList(LinkedList *L) {
+    (*L)=(LNode*)malloc(sizeof(LNode));
+    (*L)->data=0;
+    (*L)->next=NULL;
 }
 
-int Length(SeqList L) {
-    return L.length;
+int Length(LinkedList L) {
+    int i = 0;
+    LNode *p=L;
+    while (p->next){
+        p=p->next;
+        i++;
+    }
+    return i;
 }
 
-int LocateElem(SeqList L, ElemType e) {
+int LocateElem(LinkedList L, ElemType e) {
     if (!L.length) return 0;
     for (int i = 0; i < L.length; i++) {
         if (L.data[i] == e) return i;
@@ -20,14 +27,14 @@ int LocateElem(SeqList L, ElemType e) {
     return 0;
 }
 
-ElemType GetElem(SeqList L, int i) {
+LNode GetElem(LinkedList L, int i) {
     if (i < 1 || i > L.length) return 0;
     return L.data[i - 1];
 }
 
-bool ListInsert(SeqList *L, int i, ElemType e) {
+bool List_HeadInsert(LinkedList *L, ElemType e) {
     if (i < 1 || i > L->length + 1) return false;
-    if (L->length >= MaxSize) return false;
+    if (L->length >= L->MaxSize) return false;
     for (int j = L->length; j >= i; j--) {
         L->data[j] = L->data[j - 1];
     }
@@ -36,7 +43,7 @@ bool ListInsert(SeqList *L, int i, ElemType e) {
     return true;
 }
 
-bool ListDelete(SeqList *L, int i, ElemType *e) {
+bool ListDelete(LinkedList *L, int i, ElemType *e) {
     if (i < 1 || i > L->length) return false;
     *e = L->data[i - 1];
     for (int j = i; j < L->length; j++) {
@@ -47,14 +54,14 @@ bool ListDelete(SeqList *L, int i, ElemType *e) {
     return true;
 }
 
-bool PrintList(SeqList L) {
+bool PrintList(LinkedList L) {
     for (int i = 0; i < L.length; i++) {
         printf("%d ", L.data[i]);
     }
     return true;
 }
 
-bool Empty(SeqList L) {
+bool Empty(LinkedList L) {
     if (!L.length) return true;
     return false;
 }=
@@ -65,8 +72,8 @@ bool DestroyList(SeqList *L) {
     return true;
 }
 
-bool TestSeqList() {
-    SeqList test;
+bool TestLinkedList() {
+    LinkedList test;
     InitList(&test);
     if (Empty(test)) printf("empty\n");
     else printf("not empty\n");
@@ -85,3 +92,4 @@ bool TestSeqList() {
     DestroyList(&test);
     return true;
 }
+

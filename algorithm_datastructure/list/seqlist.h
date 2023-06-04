@@ -10,12 +10,9 @@
 #include "stdbool.h"
 #include "../../common.h"
 
-#define InitSize 100
-
 typedef struct {
-    ElemType *data;             //动态分配数组的指针
-    int MaxSize;                //数组最大容量
-    int length;                 //数组当前个数
+    ElemType data[MaxSize];
+    int length;
 } SeqList;
 
 /*
@@ -64,7 +61,7 @@ bool Empty(SeqList);
 bool DestroyList(SeqList *);
 
 /*
- * 测试
+ * 测试顺序表
  */
 bool TestSeqList();
 
