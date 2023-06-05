@@ -5,6 +5,10 @@
 #ifndef AUCOMPUTERSCIENCETEST_COMMON_H
 #define AUCOMPUTERSCIENCETEST_COMMON_H
 
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdbool.h"
+
 typedef int ElemType;           //数据类型
 
 #define MaxSize 100

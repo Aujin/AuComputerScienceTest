@@ -5,9 +5,6 @@
 #ifndef AUCOMPUTERSCIENCETEST_SEQLIST_H
 #define AUCOMPUTERSCIENCETEST_SEQLIST_H
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "stdbool.h"
 #include "../../common.h"
 
 typedef struct {

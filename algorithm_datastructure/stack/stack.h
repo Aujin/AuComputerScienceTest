@@ -5,13 +5,12 @@
 #ifndef AUCOMPUTERSCIENCETEST_STACK_H
 #define AUCOMPUTERSCIENCETEST_STACK_H
 
-#include <stdbool.h>
 #include "../../common.h"
 
 typedef struct {
     ElemType data[MaxSize];
     int top;
-}SqStack;
+} SqStack;
 
 /*
  * 初始化空栈
@@ -24,24 +23,34 @@ bool InitStack(SqStack *);
 bool StackEmpty(SqStack);
 
 /*
+ * 判断栈满
+ */
+bool StackFull(SqStack);
+
+/*
+ * 求栈长
+ */
+int StackLength(SqStack);
+
+/*
  * 进栈
  */
-bool Push(SqStack *,ElemType);
+bool StackPush(SqStack *, ElemType);
 
 /*
  * 出栈
  */
-bool Pop(SqStack *,ElemType*);
+bool StackPop(SqStack *, ElemType *);
 
 /*
  * 读栈顶元素
  */
-bool GetTop(SqStack ,ElemType*);
+bool StackGetTop(SqStack, ElemType *);
 
 /*
  * 销毁栈
  */
-bool DestroyStack(SqStack*);
+bool DestroyStack(SqStack *);
 
 /*
  * 测试栈

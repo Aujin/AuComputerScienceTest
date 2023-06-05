@@ -2,11 +2,10 @@
 // Created by JXR on 2023/6/4.
 //
 
-#include <stdbool.h>
-#include "../../common.h"
-
 #ifndef AUCOMPUTERSCIENCETEST_QUEUE_H
 #define AUCOMPUTERSCIENCETEST_QUEUE_H
+
+#include "../../common.h"
 
 typedef struct {
     ElemType data[MaxSize];
@@ -24,6 +23,16 @@ bool InitQueue(SqQueue*);
 bool QueueEmpty(SqQueue);
 
 /*
+ * 判队列满
+ */
+bool QueueFull(SqQueue);
+
+/*
+ * 求队列长
+ */
+int QueueLength(SqQueue);
+
+/*
  * 入队
  */
 bool EnQueue(SqQueue*,ElemType);
@@ -37,6 +46,11 @@ bool DeQueue(SqQueue*,ElemType*);
  * 读队头元素
  */
 bool GetHead(SqQueue,ElemType*);
+
+/*
+ * 销毁队列
+ */
+bool DestroyQueue(SqQueue *);
 
 /*
  * 测试队列

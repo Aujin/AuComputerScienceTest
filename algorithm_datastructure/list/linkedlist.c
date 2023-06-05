@@ -3,10 +3,11 @@
 //
 #include "linkedlist.h"
 
-bool InitLinkedList(LinkedList L) {
-    L = (LNode *) malloc(sizeof(LNode));
-    L->data = 0;
-    L->next = NULL;
+bool InitLinkedList(LinkedList *L) {
+    (*L) = (LNode *) malloc(sizeof(LNode));
+    (*L)->data = 0;
+    (*L)->next = NULL;
+    return true;
 }
 
 int LinkedListLength(LinkedList L) {
@@ -42,11 +43,8 @@ bool LinkedList_HeadInsert(LinkedList L, ElemType e) {
     LNode *s;
     s = (LNode *) malloc(sizeof(LNode));
     s->data = e;
-    printf("%d\n",e);
     s->next = L->next;
-    printf("%d\n",s->next);
     L->next = s;
-    printf("HI");
     return true;
 }
 
@@ -75,16 +73,16 @@ bool LinkedList_Insert(LinkedList L, int i, ElemType e) {
 bool LinkedListDelete(LinkedList L, int i, ElemType *e) {
     LNode *p = LinkedListGetElem(L, i - 1);
     LNode *q = p->next;
-    *e=q->data;
+    *e = q->data;
     p->next = q->next;
     free(q);
 }
 
 bool PrintLinkedList(LinkedList L) {
-    LNode *p=L->next;
+    LNode *p = L->next;
     while (p) {
         printf("%d ", p->data);
-        p=p->next;
+        p = p->next;
     }
     return true;
 }
@@ -96,10 +94,10 @@ bool LinkedListEmpty(LinkedList L) {
 
 bool DestroyLinkedList(LinkedList L) {
     LNode *p;
-    while (LinkedListEmpty(L)){
-        p=L->next;
-        while(p->next){
-            p=p->next;
+    while (LinkedListEmpty(L)) {
+        p = L->next;
+        while (p->next) {
+            p = p->next;
         }
         free(p);
     }
@@ -109,7 +107,7 @@ bool DestroyLinkedList(LinkedList L) {
 
 bool TestLinkedList() {
     LinkedList test;
-    InitLinkedList(test);
+    InitLinkedList(&test);
     if (LinkedListEmpty(test)) printf("empty\n");
     else printf("not empty\n");
     for (int i = 0; i < 30; i++) {

@@ -5,9 +5,6 @@
 #ifndef AUCOMPUTERSCIENCETEST_LINKEDLIST_H
 #define AUCOMPUTERSCIENCETEST_LINKEDLIST_H
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "stdbool.h"
 #include "..\..\common.h"
 
 typedef struct LNode {
@@ -18,7 +15,7 @@ typedef struct LNode {
 /*
  * 初始化表
  */
-bool InitLinkedList(LinkedList);
+bool InitLinkedList(LinkedList *);
 
 /*
  * 求表长
