@@ -18,47 +18,47 @@ typedef struct {
 /*
  * 初始化表
  */
-bool InitList(SeqList *);
+bool InitSeqList(SeqList *);
 
 /*
  * 求表长
  */
-int Length(SeqList);
+int SeqListLength(SeqList);
 
 /*
  * 按值查找操作
  */
-int LocateElem(SeqList, ElemType);
+int SeqListLocateElem(SeqList, ElemType);
 
 /*
  * 按位查找操作
  */
-ElemType GetElem(SeqList, int);
+ElemType SeqListGetElem(SeqList, int);
 
 /*
  * 插入操作
  */
-bool ListInsert(SeqList *, int, ElemType);
+bool SeqListInsert(SeqList *, int, ElemType);
 
 /*
  * 删除操作
  */
-bool ListDelete(SeqList *, int, ElemType *);
+bool SeqListDelete(SeqList *, int, ElemType *);
 
 /*
  * 输出操作
  */
-bool PrintList(SeqList);
+bool PrintSeqList(SeqList);
 
 /*
  * 判空操作
  */
-bool Empty(SeqList);
+bool SeqListEmpty(SeqList);
 
 /*
  * 销毁操作
  */
-bool DestroyList(SeqList *);
+bool DestroySeqList(SeqList *);
 
 /*
  * 测试顺序表

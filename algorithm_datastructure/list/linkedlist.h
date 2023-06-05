@@ -5,64 +5,70 @@
 #ifndef AUCOMPUTERSCIENCETEST_LINKEDLIST_H
 #define AUCOMPUTERSCIENCETEST_LINKEDLIST_H
 
+#include "stdio.h"
+#include "stdlib.h"
 #include "stdbool.h"
-#include <malloc.h>
 #include "..\..\common.h"
 
-typedef struct LNode{
+typedef struct LNode {
     ElemType data;
     struct LNode *next;
-}LNode, *LinkedList;
+} LNode, *LinkedList;
 
 /*
  * 初始化表
  */
-bool InitList(LinkedList *);
+bool InitLinkedList(LinkedList);
 
 /*
  * 求表长
  */
-int Length(LinkedList);
+int LinkedListLength(LinkedList);
 
 /*
  * 按值查找操作
  */
-int LocateElem(LinkedList, ElemType);
+LNode *LinkedListLocateElem(LinkedList, ElemType);
 
 /*
  * 按位查找操作
  */
-LNode GetElem(LinkedList, int);
+LNode *LinkedListGetElem(LinkedList, int);
 
 /*
  * 头插法插入操作
  */
-bool List_HeadInsert(LinkedList *, ElemType);
+bool LinkedList_HeadInsert(LinkedList, ElemType);
 
 /*
  * 尾插法插入操作
  */
-bool List_TailInsert(LinkedList *, ElemType);
+bool LinkedList_TailInsert(LinkedList, ElemType);
+
+/*
+ * 插入操作
+ */
+bool LinkedList_Insert(LinkedList, int, ElemType);
 
 /*
  * 删除操作
  */
-bool ListDelete(LinkedList *, int, ElemType *);
+bool LinkedListDelete(LinkedList, int, ElemType *);
 
 /*
  * 输出操作
  */
-bool PrintList(LinkedList);
+bool PrintLinkedList(LinkedList);
 
 /*
  * 判空操作
  */
-bool Empty(LinkedList);
+bool LinkedListEmpty(LinkedList);
 
 /*
  * 销毁操作
  */
-bool DestroyList(LinkedList *);
+bool DestroyLinkedList(LinkedList);
 
 /*
  * 测试链表

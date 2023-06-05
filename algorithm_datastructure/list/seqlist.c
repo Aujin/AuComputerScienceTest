@@ -3,16 +3,16 @@
 //
 #include "seqlist.h"
 
-bool InitList(SeqList *L) {
+bool InitSeqList(SeqList *L) {
     L->length = 0;
     return true;
 }
 
-int Length(SeqList L) {
+int SeqListLength(SeqList L) {
     return L.length;
 }
 
-int LocateElem(SeqList L, ElemType e) {
+int SeqListLocateElem(SeqList L, ElemType e) {
     if (!L.length) return 0;
     for (int i = 0; i < L.length; i++) {
         if (L.data[i] == e) return i;
@@ -20,12 +20,12 @@ int LocateElem(SeqList L, ElemType e) {
     return 0;
 }
 
-ElemType GetElem(SeqList L, int i) {
+ElemType SeqListGetElem(SeqList L, int i) {
     if (i < 1 || i > L.length) return 0;
     return L.data[i - 1];
 }
 
-bool ListInsert(SeqList *L, int i, ElemType e) {
+bool SeqListInsert(SeqList *L, int i, ElemType e) {
     if (i < 1 || i > L->length + 1) return false;
     if (L->length >= MaxSize) return false;
     for (int j = L->length; j >= i; j--) {
@@ -36,7 +36,7 @@ bool ListInsert(SeqList *L, int i, ElemType e) {
     return true;
 }
 
-bool ListDelete(SeqList *L, int i, ElemType *e) {
+bool SeqListDelete(SeqList *L, int i, ElemType *e) {
     if (i < 1 || i > L->length) return false;
     *e = L->data[i - 1];
     for (int j = i; j < L->length; j++) {
@@ -47,19 +47,19 @@ bool ListDelete(SeqList *L, int i, ElemType *e) {
     return true;
 }
 
-bool PrintList(SeqList L) {
+bool PrintSeqList(SeqList L) {
     for (int i = 0; i < L.length; i++) {
         printf("%d ", L.data[i]);
     }
     return true;
 }
 
-bool Empty(SeqList L) {
+bool SeqListEmpty(SeqList L) {
     if (!L.length) return true;
     return false;
-}=
+}
 
-bool DestroyList(SeqList *L) {
+bool DestroySeqList(SeqList *L) {
     free(L->data);
     L->length = 0;
     return true;
@@ -67,21 +67,21 @@ bool DestroyList(SeqList *L) {
 
 bool TestSeqList() {
     SeqList test;
-    InitList(&test);
-    if (Empty(test)) printf("empty\n");
+    InitSeqList(&test);
+    if (SeqListEmpty(test)) printf("empty\n");
     else printf("not empty\n");
     for (int i = 0; i < 30; i++) {
-        ListInsert(&test, i + 1, i * i);
+        SeqListInsert(&test, i + 1, i * i);
     }
-    printf("%d\n", Length(test));
-    if (Empty(test)) printf("empty\n");
+    printf("%d\n", SeqListLength(test));
+    if (SeqListEmpty(test)) printf("empty\n");
     else printf("not empty\n");
-    printf("%d\n", LocateElem(test, 400));
-    printf("%d\n", GetElem(test, 20));
+    printf("%d\n", SeqListLocateElem(test, 400));
+    printf("%d\n", SeqListGetElem(test, 20));
     int E;
-    ListDelete(&test, 3, &E);
+    SeqListDelete(&test, 3, &E);
     printf("%d\n", E);
-    PrintList(test);
-    DestroyList(&test);
+    PrintSeqList(test);
+    DestroySeqList(&test);
     return true;
 }

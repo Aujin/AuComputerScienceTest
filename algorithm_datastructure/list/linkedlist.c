@@ -3,93 +3,128 @@
 //
 #include "linkedlist.h"
 
-bool InitList(LinkedList *L) {
-    (*L)=(LNode*)malloc(sizeof(LNode));
-    (*L)->data=0;
-    (*L)->next=NULL;
+bool InitLinkedList(LinkedList L) {
+    L = (LNode *) malloc(sizeof(LNode));
+    L->data = 0;
+    L->next = NULL;
 }
 
-int Length(LinkedList L) {
+int LinkedListLength(LinkedList L) {
     int i = 0;
-    LNode *p=L;
-    while (p->next){
-        p=p->next;
+    LNode *p = L->next;
+    while (p) {
+        p = p->next;
         i++;
     }
     return i;
 }
 
-int LocateElem(LinkedList L, ElemType e) {
-    if (!L.length) return 0;
-    for (int i = 0; i < L.length; i++) {
-        if (L.data[i] == e) return i;
-    }
-    return 0;
+LNode *LinkedListLocateElem(LinkedList L, ElemType e) {
+    LNode *p = L->next;
+    while (p && p->data != e) {
+        p = p->next;
+    };
+    return p;
 }
 
-LNode GetElem(LinkedList L, int i) {
-    if (i < 1 || i > L.length) return 0;
-    return L.data[i - 1];
+LNode *LinkedListGetElem(LinkedList L, int i) {
+    if (i < 1) return NULL;
+    int j = 1;
+    LNode *p = L->next;
+    while (p && j < i) {
+        p = p->next;
+        j++;
+    }
+    return p;
 }
 
-bool List_HeadInsert(LinkedList *L, ElemType e) {
-    if (i < 1 || i > L->length + 1) return false;
-    if (L->length >= L->MaxSize) return false;
-    for (int j = L->length; j >= i; j--) {
-        L->data[j] = L->data[j - 1];
-    }
-    L->data[i - 1] = e;
-    L->length++;
+bool LinkedList_HeadInsert(LinkedList L, ElemType e) {
+    LNode *s;
+    s = (LNode *) malloc(sizeof(LNode));
+    s->data = e;
+    printf("%d\n",e);
+    s->next = L->next;
+    printf("%d\n",s->next);
+    L->next = s;
+    printf("HI");
     return true;
 }
 
-bool ListDelete(LinkedList *L, int i, ElemType *e) {
-    if (i < 1 || i > L->length) return false;
-    *e = L->data[i - 1];
-    for (int j = i; j < L->length; j++) {
-        L->data[j - 1] = L->data[j];
+bool LinkedList_TailInsert(LinkedList L, ElemType e) {
+    LNode *p = L;
+    while (p->next) {
+        p = p->next;
     }
-    L->data[L->length] = 0;
-    L->length--;
+    LNode *s;
+    s = (LNode *) malloc(sizeof(LNode));
+    s->data = e;
+    s->next = NULL;
+    p->next = s;
     return true;
 }
 
-bool PrintList(LinkedList L) {
-    for (int i = 0; i < L.length; i++) {
-        printf("%d ", L.data[i]);
+bool LinkedList_Insert(LinkedList L, int i, ElemType e) {
+    LNode *p = LinkedListGetElem(L, i - 1);
+    if (!p) return false;
+    LNode *s = (LNode *) malloc(sizeof(LNode));
+    s->next = p->next;
+    p->next = s;
+    return true;
+}
+
+bool LinkedListDelete(LinkedList L, int i, ElemType *e) {
+    LNode *p = LinkedListGetElem(L, i - 1);
+    LNode *q = p->next;
+    *e=q->data;
+    p->next = q->next;
+    free(q);
+}
+
+bool PrintLinkedList(LinkedList L) {
+    LNode *p=L->next;
+    while (p) {
+        printf("%d ", p->data);
+        p=p->next;
     }
     return true;
 }
 
-bool Empty(LinkedList L) {
-    if (!L.length) return true;
-    return false;
-}=
+bool LinkedListEmpty(LinkedList L) {
+    if (L->next) return false;
+    else return true;
+}
 
-bool DestroyList(SeqList *L) {
-    free(L->data);
-    L->length = 0;
+bool DestroyLinkedList(LinkedList L) {
+    LNode *p;
+    while (LinkedListEmpty(L)){
+        p=L->next;
+        while(p->next){
+            p=p->next;
+        }
+        free(p);
+    }
+    free(L);
     return true;
 }
 
 bool TestLinkedList() {
     LinkedList test;
-    InitList(&test);
-    if (Empty(test)) printf("empty\n");
+    InitLinkedList(test);
+    if (LinkedListEmpty(test)) printf("empty\n");
     else printf("not empty\n");
     for (int i = 0; i < 30; i++) {
-        ListInsert(&test, i + 1, i * i);
+        LinkedList_HeadInsert(test, i * i);
     }
-    printf("%d\n", Length(test));
-    if (Empty(test)) printf("empty\n");
+    printf("%d\n", LinkedListLength(test));
+    if (LinkedListEmpty(test)) printf("empty\n");
     else printf("not empty\n");
-    printf("%d\n", LocateElem(test, 400));
-    printf("%d\n", GetElem(test, 20));
+    printf("%d\n", LinkedListLocateElem(test, 400));
+    printf("%d\n", LinkedListGetElem(test, 20));
     int E;
-    ListDelete(&test, 3, &E);
+    LinkedListDelete(test, 3, &E);
     printf("%d\n", E);
-    PrintList(test);
-    DestroyList(&test);
+    PrintLinkedList(test);
+    DestroyLinkedList(test);
     return true;
 }
 
