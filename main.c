@@ -6,10 +6,9 @@
 #include "algorithm_datastructure/queue/queue.h"
 
 int main() {
-    printf("Hello World!\n");
     //TestSeqList();
     //TestLinkedList();
-    TestStack();
-    TestQueue();
+    //TestStack();
+    //TestQueue();
     return 0;
 }
